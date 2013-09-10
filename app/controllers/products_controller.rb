@@ -4,9 +4,8 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
   	@products = Product.all
-
     respond_to do |format|
-      format.html #index.html.erb
+      format.html #new.html.erb
       format.json { render json: @products }
     end
   end
@@ -19,22 +18,14 @@ class ProductsController < ApplicationController
     if current_user
       @review = @product.reviews.build
     end
-
-    respond_to do |format|
-      format.html #show.html.erb
-      format.json { render json: @products }
-    end
+    get_view_format
   end
 
   # GET /products/new
   # GET /products/new.json
   def new
   	@product = Product.new
-
-    respond_to do |format|
-      format.html #new.html.erb
-      format.json { render json: @product }
-    end
+    get_view_format
   end
 
   # POST /products
@@ -44,7 +35,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: '#{@product.name} was successfully created.' }
+        format.html { redirect_to @product, notice: "#{@product.name} was successfully created." }
         format.json { render json: @product, status: :created, location: @product }
       else
         format.html { render action: "new" }
@@ -87,6 +78,13 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :description, :price_in_cents)
+  end
+
+  def get_view_format
+    respond_to do |format|
+      format.html #new.html.erb
+      format.json { render json: @product }
+    end
   end
 
 
