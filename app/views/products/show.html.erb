@@ -1,8 +1,48 @@
-
 <h1><%= @product.name %></h1>
 
 <h2>Product Name: <%= @product.name %></h2>
 <p>Product Descpription: <%= @product.description %></p>
 <p>Price: <%= number_to_currency(@product.price_in_cents) %></p>
 
+<% if current_user %>
+	
+	<h4>New Review</h4>
 
+  <%= form_for([@product, @review]) do |f| %>
+    <% if @review.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+        <ul>
+        <% @review.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :comment %><br />
+      <%= f.text_area :comment %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+
+<% else %>
+  <p>Please <%= link_to "log in", new_session_path %> to add a review.</p> 
+<% end %>
+
+
+
+	
+<h3>Reviews</h3>
+
+<p>Reviews for <%= @product.name %></p>
+
+<ol>
+	<% @product.reviews.each do |review| %>
+		<li><%= review.comment %></li>
+	<% end %>
+</ol>
