@@ -1,7 +1,7 @@
 <h1>Products</h1>
 
 <% @products.each do |product| %>
-	<h2>Product Name: <%= product.name %></h2>
+	<h2><%= link_to product.name, product %></h2>
 	<p>Product Descpription: <%= product.description %></p>
 	<p>Price: <%= number_to_currency(product.price_in_cents) %></p>
 <% end %>
