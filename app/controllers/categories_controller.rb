@@ -4,5 +4,6 @@ class CategoriesController < ApplicationController
   end
 
   def show
+  	# do stuff
   end
 end
