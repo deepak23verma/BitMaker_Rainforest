@@ -25,5 +25,30 @@
 		<%= f.label :password_confirmation %><br/>
 		<%= f.password_field :password_confirmation %>
 	</div>
+
+	<div class="field">
+		<%= f.label :date_of_birth %><br/>
+		<%= f.date_select :date_of_birth, :start_year => 1950, :end_year => Time.now.year %>
+	</div>
+
+	<div class="field">
+		<%= f.file_field :picture %><br/>
+	</div>
+
 	<div class="actions"><%= f.submit %></div>
 <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
