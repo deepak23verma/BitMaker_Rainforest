@@ -1,2 +1,8 @@
 <h1><%= "#{@category.name} Home Page" %></h1>
 
+<% @category.products.each do |product| %>
+	<h2><%= link_to product.name, product %></h2>
+	<p>Price: <%= number_to_currency(product.price_in_cents) %></p>
+	<p>Product Descpription: <%= product.description %></p>
+	<p>Price: <%= number_to_currency(product.price_in_cents) %></p>
+<% end %>
