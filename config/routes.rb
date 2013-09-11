@@ -1,5 +1,8 @@
 Rainforest::Application.routes.draw do
   
+  get "categories/index"
+  get "categories/show"
+  
   resources :products do 
     resources :reviews, :except => [:index]
   end

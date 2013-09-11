@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  # before_action :set_category
   before_filter :ensure_logged_in, :only => [:show]
   
   # GET /products
@@ -25,7 +26,8 @@ class ProductsController < ApplicationController
   # GET /products/new
   # GET /products/new.json
   def new
-  	@product = Product.new
+  	# @product = @category.products.new
+    @product = Product.new
     get_view_format
   end
 
@@ -78,7 +80,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :price_in_cents)
+    params.require(:product).permit(:name, :description, :price_in_cents, :category_id)
   end
 
   def get_view_format
@@ -87,6 +89,10 @@ class ProductsController < ApplicationController
       format.json { render json: @product }
     end
   end
+
+  # def set_category
+  #   @category = Category.find(params[:category_id])
+  # end
 
 
 end
