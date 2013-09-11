@@ -1,15 +1,12 @@
 class ProductsController < ApplicationController
-  # before_action :set_category
   before_filter :ensure_logged_in, :only => [:show]
+  respond_to :html, :json
   
   # GET /products
   # GET /products.json
   def index
   	@products = Product.all
-    respond_to do |format|
-      format.html #new.html.erb
-      format.json { render json: @products }
-    end
+    respond_with @products
   end
 
   # GET /products/1
@@ -20,7 +17,7 @@ class ProductsController < ApplicationController
     if current_user
       @review = @product.reviews.build
     end
-    get_view_format
+    respond_with @product
   end
 
   # GET /products/new
@@ -28,7 +25,7 @@ class ProductsController < ApplicationController
   def new
   	# @product = @category.products.new
     @product = Product.new
-    get_view_format
+    respond_with @product
   end
 
   # POST /products
@@ -82,17 +79,5 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :description, :price_in_cents, :category_id)
   end
-
-  def get_view_format
-    respond_to do |format|
-      format.html #new.html.erb
-      format.json { render json: @product }
-    end
-  end
-
-  # def set_category
-  #   @category = Category.find(params[:category_id])
-  # end
-
 
 end
