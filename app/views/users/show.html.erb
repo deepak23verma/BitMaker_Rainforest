@@ -1,4 +1,7 @@
 <h1><%= @user.name %>'s Profile Page </h1>
+<p><em>Member since <%= time_ago_in_words(@user.created_at) %></em></p>
+<p><em>Last updated <%= time_ago_in_words(@user.updated_at) %></em></p>
+
 
 <h2><%= @user.email %></h2>
 <h3><%= link_to "Flickr", "http://www.flickr.com/photos/#{@user.flickr_username}" %></h3>
