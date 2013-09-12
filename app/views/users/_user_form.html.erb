@@ -1,0 +1,46 @@
+<%= form_for @user do |f| %>
+	<% if @user.errors.any? %>
+		<div class="error_messages">
+			<h2>Form is invalid</h2>
+			<ul>
+				<% for message in @user.errors.full_messages %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<div class="field">
+		<%= f.label :name %><br/>
+		<%= f.text_field :name, :size =>"40", autofocus: true %>
+	</div>
+	<div class="field">
+		<%= f.label :email %><br/>
+		<%= f.text_field :email, :size =>"40" %>
+	</div>
+	<div class="field">
+		<%= f.label :password %><br/>
+		<%= f.password_field :password, :size =>"40" %>
+	</div>
+	<div class="field">
+		<%= f.label :password_confirmation %><br/>
+		<%= f.password_field :password_confirmation, :size =>"40" %>
+	</div>
+
+	<div class="field">
+		<%= f.label :date_of_birth %><br/>
+		<%= f.date_select :date_of_birth, :start_year => 1950, :end_year => Time.now.year %>
+	</div>
+
+	<div class="field">
+		<%= f.label :flickr_username %><br/>
+		<%= f.text_field :flickr_username, :size =>"40", :placeholder => "flickr.com/photos/username" %> 
+	</div>
+
+	<div class="field">
+		<%= f.label :instagram_username %><br/>
+		<%= f.text_field :instagram_username, :size =>"40", :placeholder => "instagram.com/username" %>
+
+	</div>
+
+	<div class="actions"><%= f.submit %></div>
+<% end %>
