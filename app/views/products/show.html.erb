@@ -1,12 +1,10 @@
 <h1><%= @product.name %></h1>
-
-<h2>Product Name: <%= @product.name %></h2>
 <p>Product Descpription: <%= @product.description %></p>
 <p>Price: <%= number_to_currency(@product.price_in_cents) %></p>
 
 <% if current_user %>
   <h3>Reviews</h3>
-  <p>Reviews for <%= @product.name %> </p>
+  <p><%= pluralize(@product.reviews.count, "review") %></p>
 
   <% @product.reviews.each do |review| %>
     <p>
@@ -33,8 +31,8 @@
     </div>
   <% end %>
 
-<% else %>
-  <p>Please <%= link_to "log in", new_session_path %> to add a review.</p>
+  <% else %>
+    <p>Please <%= link_to "log in", new_session_path %> to add a review.</p>
 <% end %> 
 
 <%= link_to "Edit", edit_product_path %> 
