@@ -4,5 +4,5 @@
 	<h2><%= link_to product.name, product %></h2>
 	<p>Product Descpription: <%= product.description %></p>
 	<p>Price: <%= number_to_currency(product.price_in_cents) %></p>
-	<p>Category: <%= product.category.name %></p>
+	<p>Category: <%= link_to product.category.name, category_path(product.category) %></p>
 <% end %>
