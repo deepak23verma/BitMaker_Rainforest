@@ -7,16 +7,16 @@
   <p><%= pluralize(@product.reviews.count, "review") %></p>
 
   <% @product.reviews.each do |review| %>
-    <p>
+    <p> 
       <%= review.comment %>
       <br>
       <% if review.user_id != nil %>
-        <em> by <%= review.user.email %></em> 
-        Added on: <%= review.created_at %>
+        <em> by <%= review.user.name %></em> 
+        Created: <%= time_ago_in_words(review.created_at) %> ago
       <% end %>
     </p>
   <% end %>
-  <h4>New Reviews</h4>
+  <h4>New Review</h4>
 
   <%= form_for([@product, @review]) do |f| %>
     
