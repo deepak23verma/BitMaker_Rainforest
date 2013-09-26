@@ -1,0 +1,14 @@
+<p><%= pluralize(@product.reviews.count, "review") %></p>
+
+<% @product.reviews.each do |review| %>
+    <p> 
+      <%= review.comment %>
+      <br>
+      <% if review.user_id != nil %>
+        <em> by <%= review.user.name %></em> 
+      <% end %>
+        <% if session[:user_id] == review.user_id %>
+          <strong>Only the user can delete their post</strong>
+        <% end %>
+    </p>
+  <% end %>
