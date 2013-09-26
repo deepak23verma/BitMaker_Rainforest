@@ -9,7 +9,6 @@
     <%= render :partial => "products/reviews" %>
   </div>
 <!-- ################################################################# -->  
-  <div id="new_review">
     <h4>New Review</h4>
     <%= form_for([@product, @review], :remote => true) do |f| %> 
       <div id="review-form-errors">
@@ -28,7 +27,6 @@
       <% else %>
         <p>Please <%= link_to "log in", new_session_path %> to add a review.</p>
     <% end %> 
-  </div>
 
 
 
@@ -39,9 +37,17 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $("#new_review")
-        .bind('ajax:beforeSend', function() {alert("loading!");})
-        .bind('ajax:success', function(data, status, xhr) {alert("success!");})
-        .bind('ajax:error', function(xhr, status, error) {alert("error!");})
-        .bind('ajax:complete', function() {alert("complete!");});
+        .bind('ajax:beforeSend', function() {
+          $("input[type='submit']")
+          .val('Saving...')
+          .attr('disabled', 'disabled');
+        })
+        // .bind('ajax:success', function(data, status, xhr) {alert("success!");})
+        // .bind('ajax:error', function(xhr, status, error) {alert("error!");})
+        .bind('ajax:complete', function() {
+          $("input[type='submit']")
+          .val('Create Review')
+          .removeAttr('disabled');
+        });
   });
 </script>
