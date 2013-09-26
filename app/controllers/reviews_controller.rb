@@ -12,14 +12,15 @@ class ReviewsController < ApplicationController
   def create 
   	@review = @product.reviews.build(review_params)
   	@review.user_id = current_user.id
-    
-     
-
-  	if @review.save
-  		redirect_to @product, notice: 'Review created successfully'
-  	else 
-      render "products/show" 
-  	end
+    respond_to do |format|
+    	if @review.save
+        format.html {redirect_to @product, notice: 'Review created successfully'}
+    	  format.js {}    
+      else 
+        format.html {render "products/show" }
+        format.js {}
+    	end
+    end
   end
 
   def edit

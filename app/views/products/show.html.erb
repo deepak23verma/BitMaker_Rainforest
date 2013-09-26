@@ -22,7 +22,7 @@
 <!-- ################################################################# -->  
   <h4>New Review</h4>
 
-  <%= form_for([@product, @review]) do |f| %>
+  <%= form_for([@product, @review], :remote => true) do |f| %>
     
     
 
