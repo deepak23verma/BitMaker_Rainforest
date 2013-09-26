@@ -9,22 +9,39 @@
     <%= render :partial => "products/reviews" %>
   </div>
 <!-- ################################################################# -->  
-  <h4>New Review</h4>
+  <div id="new_review">
+    <h4>New Review</h4>
+    <%= form_for([@product, @review], :remote => true) do |f| %> 
+      <div id="review-form-errors">
+        <%= render :partial => "/products/review_form_errors" %>
+      </div>
 
-  <%= form_for([@product, @review], :remote => true) do |f| %> 
+        <div class="field">
+          <%= f.label :comment %><br/>
+          <%= f.text_area :comment %>
+        </div>
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+      <% end %>
 
-    <div class="field">
-      <%= f.label :comment %><br/>
-      <%= f.text_area :comment %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  <% end %>
+      <% else %>
+        <p>Please <%= link_to "log in", new_session_path %> to add a review.</p>
+    <% end %> 
+  </div>
 
-  <% else %>
-    <p>Please <%= link_to "log in", new_session_path %> to add a review.</p>
-<% end %> 
+
+
 
 <%= link_to "Edit", edit_product_path(@product) %> | 
 <%= link_to 'Delete', @product, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#new_review")
+        .bind('ajax:beforeSend', function() {alert("loading!");})
+        .bind('ajax:success', function(data, status, xhr) {alert("success!");})
+        .bind('ajax:error', function(xhr, status, error) {alert("error!");})
+        .bind('ajax:complete', function() {alert("complete!");});
+  });
+</script>
