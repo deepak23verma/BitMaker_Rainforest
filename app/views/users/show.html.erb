@@ -1,4 +1,9 @@
 <h1><%= @user.name %>'s Profile Page </h1>
+<p>
+	<% if session[:user_id] == @user.id %>
+    <%= link_to 'Edit my profile', edit_user_path(@user) %>
+   <% end %>
+</p>
 <p><em>Member since <%= time_ago_in_words(@user.created_at) %></em></p>
 <p><em>Last updated <%= time_ago_in_words(@user.updated_at) %></em></p>
 

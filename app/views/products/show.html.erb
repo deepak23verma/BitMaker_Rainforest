@@ -3,6 +3,7 @@
 <p>Price: <%= number_to_currency(@product.price_in_cents) %></p>
 
 <% if current_user %>
+<!-- ################################################################# -->
   <h3>Reviews</h3>
   <p><%= pluralize(@product.reviews.count, "review") %></p>
 
@@ -12,10 +13,13 @@
       <br>
       <% if review.user_id != nil %>
         <em> by <%= review.user.name %></em> 
-        Created: <%= time_ago_in_words(review.created_at) %> ago
       <% end %>
+        <% if session[:user_id] == review.user_id %>
+          <strong>Only the user can delete their post</strong>
+        <% end %>
     </p>
   <% end %>
+<!-- ################################################################# -->  
   <h4>New Review</h4>
 
   <%= form_for([@product, @review]) do |f| %>
@@ -35,5 +39,5 @@
     <p>Please <%= link_to "log in", new_session_path %> to add a review.</p>
 <% end %> 
 
-<%= link_to "Edit", edit_product_path %> | 
+<%= link_to "Edit", edit_product_path(@product) %> | 
 <%= link_to 'Delete', @product, method: :delete, data: { confirm: 'Are you sure?' } %>
